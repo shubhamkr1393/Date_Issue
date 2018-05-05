@@ -8,8 +8,13 @@ lastMonth = first - datetime.timedelta(days=1)
 print lastMonth
 print lastMonth.strftime("%Y%m")
 
-# COMMAND ----------
+Output:
+2018-05-05
+2018-05-01
+2018-04-30
+201804
 
+# COMMAND ----------
 import datetime
 cdl_effective_date = '2012-01-05'
 cdl_date = cdl_effective_date
@@ -20,3 +25,9 @@ print type(restricted_date)
 restricted_date_str = restricted_date.strftime('%Y%m%d') 
 print restricted_date_str
 print type(restricted_date_str)
+
+Output:
+2011-12-31
+<type 'datetime.date'>
+20111231
+<type 'str'>
