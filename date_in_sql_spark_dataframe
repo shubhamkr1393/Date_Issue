@@ -1,5 +1,9 @@
 ###########################################################################################################################################
 %sql
+create table if not exists demo(id string, dates string);
+insert into demo values('101','2017-12-05');
+insert into demo values('102','2017-10-05');
+insert into demo values('102','2017-11-25');
 select * from demo;
 Output:
 id	dates
