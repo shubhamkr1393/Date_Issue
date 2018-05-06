@@ -1,5 +1,64 @@
 #########################################################################################################################################
 # Databricks notebook source
+#Major Issue I faced during conversion (%m and %M are different)
+#Error Type-1
+import datetime
+cdl_effective_date = '2018-12-20'
+date_received = datetime.datetime.strptime(cdl_effective_date, "%Y-%m-%d").date()
+print (date_received)
+date_received_str = date_received.strftime('%Y%M%d') 
+print (date_received_str)
+
+Output:
+2018-12-20
+20180020
+#strftime('%Y%M%d') set month value as zero zero (00) by default.
+#########################################################################################################################################
+#Error Type-2
+import datetime
+cdl_effective_date = '2018-12-20'
+date_received = datetime.datetime.strptime(cdl_effective_date, "%Y-%M-%d").date()
+print (date_received)
+date_received_str = date_received.strftime('%Y%M%d') 
+print (date_received_str)
+
+Output:
+2018-01-20
+20180020
+#strptime(cdl_effective_date, "%Y-%M-%d").date() set month value as '01' by default.
+#########################################################################################################################################
+#Error Type-3
+import datetime
+cdl_effective_date = '2018-12-20'
+date_received = datetime.datetime.strptime(cdl_effective_date, "%Y-%M-%d").date()
+print (date_received)
+date_received_str = date_received.strftime('%Y%m%d') 
+print (date_received_str)
+
+Output:
+2018-01-20
+20180120
+#########################################################################################################################################
+#Correct code
+import datetime
+cdl_effective_date = '2018-12-20'
+date_received = datetime.datetime.strptime(cdl_effective_date, "%Y-%m-%d").date()
+print (date_received)
+date_received_str = date_received.strftime('%Y%m%d') 
+print (date_received_str)
+
+Output:
+2018-12-20
+20181220
+#########################################################################################################################################
+from datetime import datetime
+oldFormat = "26JAN2018"
+datetime_object = datetime.strptime(oldFormat, '%d%b%Y')
+print datetime_object
+
+Output:
+2018-01-26 00:00:00
+#########################################################################################################################################
 #Get last day of previous month.
 import datetime
 today = datetime.date.today()
@@ -58,63 +117,4 @@ print endDate
 Output:
 2018-06-01
 2018-06-30
-#########################################################################################################################################
-#Major Issue I faced during conversion (%m and %M are different)
-#Error Type-1
-import datetime
-cdl_effective_date = '2018-12-20'
-date_received = datetime.datetime.strptime(cdl_effective_date, "%Y-%m-%d").date()
-print (date_received)
-date_received_str = date_received.strftime('%Y%M%d') 
-print (date_received_str)
-
-Output:
-2018-12-20
-20180020
-#strftime('%Y%M%d') set month value as zero zero (00) by default.
-#########################################################################################################################################
-#error Type-2
-import datetime
-cdl_effective_date = '2018-12-20'
-date_received = datetime.datetime.strptime(cdl_effective_date, "%Y-%M-%d").date()
-print (date_received)
-date_received_str = date_received.strftime('%Y%M%d') 
-print (date_received_str)
-
-Output:
-2018-01-20
-20180020
-#strptime(cdl_effective_date, "%Y-%M-%d").date() set month value as '01' by default.
-#########################################################################################################################################
-#Error Type-3
-import datetime
-cdl_effective_date = '2018-12-20'
-date_received = datetime.datetime.strptime(cdl_effective_date, "%Y-%M-%d").date()
-print (date_received)
-date_received_str = date_received.strftime('%Y%m%d') 
-print (date_received_str)
-
-Output:
-2018-01-20
-20180120
-#########################################################################################################################################
-#Correct code
-import datetime
-cdl_effective_date = '2018-12-20'
-date_received = datetime.datetime.strptime(cdl_effective_date, "%Y-%m-%d").date()
-print (date_received)
-date_received_str = date_received.strftime('%Y%m%d') 
-print (date_received_str)
-
-Output:
-2018-12-20
-20181220
-#########################################################################################################################################
-from datetime import datetime
-oldFormat = "26JAN2018"
-datetime_object = datetime.strptime(oldFormat, '%d%b%Y')
-print datetime_object
-
-Output:
-2018-01-26 00:00:00
 #########################################################################################################################################
