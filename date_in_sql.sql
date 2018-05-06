@@ -45,3 +45,19 @@ dates	      year(to_date(CAST(unix_timestamp(demo.`dates`, 'YYYY-MM-dd') AS TIME
 2017-10-05	2017
 2017-12-05	2017
 #########################################################################################################################################
+%sql
+drop table if exists demo;
+create table if not exists demo(id string, month string, year string);
+insert into demo values('101','05','2017');
+insert into demo values('102','10','2017');
+insert into demo values('103','12','2017');
+#########################################################################################################################################
+#Get date from month and year.
+%sql
+select to_date(cast(year||"-"|| case when length(month) <2 then "0"||month else month end||"-01" as date),"YYYY-MM-DD") as date,year,month from demo
+Output:
+date	      year	month
+2017-05-01	2017	05
+2017-12-01	2017	12
+2017-10-01	2017	10
+#########################################################################################################################################
